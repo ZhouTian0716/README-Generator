@@ -16,6 +16,8 @@ const questions = [
   'What command should be run to run tests?',
   'What does the user need to know about using the repo?',
 ];
+const licenseOptions = ['MIT', 'APACHE 2.0', 'GPL 3.0', 'BSD 3', 'None'];
+
 // User inputs here.
 const promptUser = () => {
     return inquirer.prompt([
@@ -47,7 +49,7 @@ const promptUser = () => {
         type: 'list',
         name: 'license',
         message: questions[4],
-        choices: ['MIT', 'APACHE 2.0', 'GPL 3.0', 'BSD 3', 'None'],
+        choices: licenseOptions,
         validate: (value) => {if(value){return true} else {return 'Need a value to continue.'}}
       },
       {
@@ -81,7 +83,7 @@ const promptUser = () => {
 // Bonus using writeFileAsync as a promise
 const init = () => {
     promptUser()
-      .then((res) => writeFileAsync('README.md', generateMarkdown(res)))
+      .then((res) => writeFileAsync('README-Generated.md', generateMarkdown(res)))
       .then(() => console.log('MD file Successfully generated.'))
       .catch((err) => console.error(err));
   };
